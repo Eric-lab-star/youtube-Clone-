@@ -1,17 +1,20 @@
 {
   "name": "youtube-clone",
-  "version": "1.0.0",  
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Eric-lab-star/youtube-Clone-.git"
   },
-  "scripts":{
-    "win":"node index.js"
+  "scripts": {
+    "win": "node index.js"
   },
   "author": "Eric Kim",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Eric-lab-star/youtube-Clone-/issues"
   },
-  "homepage": "https://github.com/Eric-lab-star/youtube-Clone-#readme"
+  "homepage": "https://github.com/Eric-lab-star/youtube-Clone-#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
