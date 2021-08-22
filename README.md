@@ -1,7 +1,7 @@
 # My video app
 
 global routers
-/ --> Home
+/ -> Home
 /join --> Join
 /login -> Login
 /search -> search
