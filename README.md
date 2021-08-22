@@ -12,7 +12,7 @@ users router
 /users/edit
 /users/delete
 
-<video router>
+video router
 /videos/:id --> watch video
 /videos/:id/edit
 /videos/:id/delte
