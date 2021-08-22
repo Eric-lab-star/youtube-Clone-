@@ -1,4 +1,7 @@
 extends base.pug
 block content
-    h1 Home
+    h3 Welcome! Here you will see trending videos
+    ul
+        each video in videos
+            li=video
 
