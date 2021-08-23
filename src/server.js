@@ -1,3 +1,5 @@
+import "./db";
+
 import express from "express";
 import morgan from "morgan";
 import globalRouter from "./routers/globaRouters";
@@ -10,7 +12,7 @@ const app = express();
 
 //middlewares
 app.use(logger);
-
+app.use(express.urlencoded({ extended: true }));
 //routers
 app.use("/", globalRouter);
 app.use("/users", userRouter);
