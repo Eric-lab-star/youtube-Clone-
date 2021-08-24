@@ -1,8 +1,11 @@
 extends base
 
 block content 
-    form(method="post")
-        input(placeholder="title", requred, type="text" name="title")
-        input(placeholder="description", requred, type="text" name="description")
-        input(placeholder="Hashtags, seperated by comma", requred, type="text" name="hashtags", required)
-        input(type="submit", value="Upload")
+    if errormsg 
+        h3=errormsg 
+    else 
+        form(method="post")
+            input(placeholder="title", requred, type="text" name="title")
+            input(placeholder="description", requred, type="text" name="description")
+            input(placeholder="Hashtags, seperated by comma", requred, type="text" name="hashtags", required)
+            input(type="submit", value="Upload")
