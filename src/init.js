@@ -1,6 +1,7 @@
 //mongo db와 연결
 import "./db";
 import "./models/Video";
+import "./models/User";
 //서버 연결
 import app from "./server";
 

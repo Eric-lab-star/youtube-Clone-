@@ -1,4 +1,9 @@
-export const join = (req, res) => res.send("join");
+export const getJoin = (req, res) =>
+  res.render("join", { pageTitle: "Create Account" });
+export const postJoin = async (req, res) => {
+  console.log(req.body);
+  res.end();
+};
 export const edit = (req, res) => res.send("edit user");
 export const remove = (req, res) => res.send("Delete user");
 export const login = (req, res) => res.send("Login");
