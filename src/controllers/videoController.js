@@ -40,7 +40,11 @@ export const postEdit = async (req, res) => {
 
 export const search = (req, res) => res.send("search videos");
 export const upload = (req, res) => res.send("upload vidoes");
-export const deleteVideo = (req, res) => res.send("Delete vidoes");
+export const deleteVideo = async (req, res) => {
+  const { id } = req.params;
+  await Video.findByIdAndDelete(id);
+  return res.redirect("/");
+};
 
 //upload controllers
 export const getUpload = (req, res) => {
