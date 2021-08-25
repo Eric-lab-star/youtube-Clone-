@@ -12,6 +12,18 @@ const videoSchema = new mongoose.Schema({
     rating: { type: Number, default: 0 },
   },
 });
+//mongoose middleware
+videoSchema.pre("save", async function () {
+  this.hashtags = this.hashtags[0]
+    .split(",")
+    .map((word) => (word.startsWith("#") ? word : `#${word}`));
+});
+//나의 static만들기
+videoSchema.static("formatHashtags", function (hashtags) {
+  return hashtags
+    .split(",")
+    .map((word) => (word.startsWith("#") ? word : `#${word}`));
+});
 //모델 이름과 schema를 묶어 준다.
 const Video = mongoose.model("Video", videoSchema);
 
