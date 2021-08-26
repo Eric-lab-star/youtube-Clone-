@@ -1,3 +1,4 @@
+import "dotenv/config";
 //mongo db와 연결
 import "./db";
 import "./models/Video";
