@@ -68,7 +68,7 @@ export const startGit = (req, res) => {
   const baseUrl = "https://github.com/login/oauth/authorize";
   const config = {
     client_id: process.env.GH_CLIENT,
-
+    allow_signUP: false,
     scope: "read:user user:email ",
   };
   const params = new URLSearchParams(config).toString();
@@ -79,7 +79,7 @@ export const startGit = (req, res) => {
 export const finishGit = async (req, res) => {
   const baseUrl = "https://github.com/login/oauth/access_token";
   const config = {
-    clietn_id: process.env.GH_CLIENT,
+    client_id: process.env.GH_CLIENT,
     client_secret: process.env.GH_SECRET,
     code: req.query.code,
   };
@@ -95,14 +95,28 @@ export const finishGit = async (req, res) => {
   ).json();
   if ("access_token" in tokenRequest) {
     const { access_token } = tokenRequest;
-    const userRequest = await (
-      await fetch("https://api.github.com/user", {
+    const apiUrl = "https://api.github.com";
+    const userData = await (
+      await fetch(`${apiUrl}/user`, {
         headers: {
           Authorization: `token ${access_token}`,
         },
       })
     ).json();
-    console.log(userRequest);
+    console.log(userData);
+    const emailData = await (
+      await fetch(`${apiUrl}/user/emails`, {
+        headers: {
+          Authorization: `token ${access_token}`,
+        },
+      })
+    ).json();
+    const email = emailData.find(
+      (email) => email.primary === true && email.verified === true
+    );
+    if (!email) {
+      return res.redirect("/login");
+    }
   } else {
     return res.redirect("/login");
   }
