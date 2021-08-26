@@ -1,5 +1,6 @@
 import User from "../models/User";
 import bcrypt from "bcrypt";
+import { urlencoded } from "express";
 export const getJoin = (req, res) => {
   res.render("join", { pageTitle: "Create Account" });
 };
@@ -66,13 +67,32 @@ export const postLogin = async (req, res) => {
 export const startGit = (req, res) => {
   const baseUrl = "https://github.com/login/oauth/authorize";
   const config = {
-    client_id: "a3f422e918d7ac257ae7",
+    client_id: process.env.GH_CLIENT,
 
     scope: "read:user user:email ",
   };
   const params = new URLSearchParams(config).toString();
   const finalUrl = `${baseUrl}?${params}`;
   return res.redirect(finalUrl);
+};
+
+export const finishGit = async (req, res) => {
+  const baseUrl = "https://github.com/login/oauth/access_token";
+  const config = {
+    clietn_id: process.env.GH_CLIENT,
+    client_secret: process.env.GH_SECRET,
+    code: req.query.code,
+  };
+  const params = new URLSearchParams(config).toString();
+  const finalUrl = `${baseUrl}?${params}`;
+  const data = await fetch(finalUrl, {
+    method: "POST",
+    header: {
+      Accept: "application/json",
+    },
+  });
+  const json = await data.json();
+  console.log(json);
 };
 export const edit = (req, res) => res.send("edit user");
 export const remove = (req, res) => res.send("Delete user");
